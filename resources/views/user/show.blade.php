@@ -10,14 +10,14 @@
                     <div class="card-body">
                         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 580px;">
                             <div class="">
-                                ID No : {{$product->id}} <br>
-                                Product Category : {{$product->category->title}}<br>
-                                Product Name : {{$product->name}}<br>
-                                Product Price : {{number_format($product->price, 2)}} <br>
-                                Product Description : {{$product->description}}
+                                ID No : {{$adminList->id}} <br>
+                                User Name : {{$adminList->name}}<br>
+                                User Name : {{$adminList->username}}<br>
+                                User Email : {{$adminList->email}}<br>
+                                User Role Id : {{$adminList->role_id}}<br>
                             </div>
                             <div class="">
-                                <a href="{{ route('products.index') }}" class="btn btn-info">Back</a>
+                                <a href="{{ route('admin.list') }}" class="btn btn-info">Back</a>
                             </div>
                         </div>
                     </div>

@@ -11,6 +11,14 @@
                         <a class="btn btn-info" href="{{ route('home') }}"> Dashboard</a>
                         <a class="btn btn-primary" href="{{ route('products.index') }}"> Refresh</a>
                     </div>
+                    <div class="pull-right mt-2 ms-2">
+                        <div class="">
+                            <form action="{{route('products.index')}}" method="GET">
+                                <input type="text" name="search" id="search" placeholder="Search Here">
+                                <button type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
                     <div class="card-body">
 
                         @if ($message = Session::get('success'))
