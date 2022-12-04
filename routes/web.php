@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -33,7 +34,8 @@ Route::get('clear-all', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home/userlist', [App\Http\Controllers\HomeController::class, 'userlistshow'])->name('home.userlist');
+
+//Route::get('/home/userlist', [App\Http\Controllers\HomeController::class, 'userlistshow'])->name('home.userlist');
 
 //Category Route
 //Route::resource('category', CategoryController::class);
@@ -50,3 +52,15 @@ Route::get('/category/show/{id}',[CategoryController::class,'show'])->name('cate
 Route::get('/category/{id}/edit',[CategoryController::class,'edit'])->name('category.edit');
 Route::post('/category/update/{id}',[CategoryController::class,'update'])->name('category.update');
 Route::get('/category/{id}',[CategoryController::class,'destroy'])->name('category.destroy');
+
+//Data Searching 
+Route::get('/search/', [CategoryController::class, 'search'])->name('search');
+
+//Admin Route
+Route::get('/admin-list',[AdminController::class,'adminList'])->name('admin.list');
+Route::get('/admin-create',[AdminController::class,'adminCreate'])->name('admin.create');
+Route::post('/admin-store',[AdminController::class,'adminStore'])->name('admin.store');
+Route::get('/admin-edit/{id}/edit',[AdminController::class,'adminEdit'])->name('admin.edit');
+Route::post('/admin-update/{id}',[AdminController::class,'adminUpdate'])->name('admin.update');
+Route::get('/admin-show/{id}',[AdminController::class,'adminShow'])->name('admin.show');
+Route::get('/admin-delete/{id}',[AdminController::class,'adminDelete'])->name('admin.delete');

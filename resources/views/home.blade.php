@@ -41,7 +41,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{route('home.userlist')}}" class="nav-link link-dark">
+                                    <a href="{{route('admin.list')}}" class="nav-link link-dark">
                                         <svg class="bi pe-none me-2" width="16" height="16">
                                             <use xlink:href="#grid"></use>
                                         </svg>

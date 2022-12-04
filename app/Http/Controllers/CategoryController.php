@@ -12,10 +12,24 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::all();
         return view('category.index', compact('categories'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+    
+        // Search in the title and body columns from the posts table
+        $categories = Category::query()
+            ->where('title', 'LIKE', "%{$search}%")
+            ->get();
+    
+        // Return the search view with the resluts compacted
+        return view('search', compact('categories'));
     }
 
     /**
