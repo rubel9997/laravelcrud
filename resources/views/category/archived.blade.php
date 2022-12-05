@@ -5,14 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
-                    <div class="pull-right mt-2 ms-2">
-                        <a class="btn btn-success" href="{{ route('category.create') }}"> Create Category</a>
-                        <a class="btn btn-info" href="{{ route('home') }}"> Dashboard</a>
-                        <a class="btn btn-primary" href="{{ route('category.index') }}"> Refresh</a>
-                        <a href="{{ route('category.archived') }}" name="archived" class="btn btn-dark">Archieve</a>
-                    </div>
+                    <div class="card-header">{{ __('Archived Catergory') }}</div>
                     <div class="card-body">
+                        <div class="pull-right mt-2 ms-2">
+                            <a class="btn btn-success" href="{{ route('category.index') }}"> Back</a>
+                        </div>
 
                         @if ($message = Session::get('success'))
                             <div class="alert alert-success">
@@ -28,14 +25,21 @@
                                     <th>Category Name</th>
                                     <th width="280px">Action</th>
                                 </tr>
-                                @foreach ($categories as $category)
+                                @foreach ($categoryArchivedData as $category)
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $category->title }}</td>
                                     <td>
-                                        <a href="{{ route('category.show',$category->id) }}" class="btn btn-primary">Show</a>
-                                        <a href="{{ route('category.edit',$category->id) }}" class="btn btn-info">Edit</a>
-                                        <a href="{{ route('category.destroy',$category->id) }}" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger">Delete</a>
+
+                                        <form action="{{ route('category.restore',$category->id) }}" method="POST">
+                                            @csrf
+                                            <a href="{{ route('category.restore',$category->id) }}" onclick="return confirm('Are You Sure!?')" class="btn btn-info">Restore</a>
+                                        </form>
+                                        <form action="{{ route('category.forceDelete',$category->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="{{ route('category.forceDelete',$category->id) }}" onclick="return confirm('Are you sure to delete forever?')" class="btn btn-danger">Delete Forever</a>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

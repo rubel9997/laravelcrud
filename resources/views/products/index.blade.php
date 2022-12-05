@@ -36,7 +36,7 @@
                                     <td>{{ $product->name }}</td>
                                     <td>{{ number_format($product->price, 2) }}</td>
                                     <td>{{ $product->description }}</td>
-                                    <td>{{ $product->category->title }}</td>
+                                    <td>{{ $product->category->title ?? 'No Title' }}</td>
                                     <td>
                                         <form action="{{ route('products.destroy',$product->id) }}" method="POST">
 

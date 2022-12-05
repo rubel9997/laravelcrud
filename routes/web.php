@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,9 @@ Route::get('/home/userlist', [App\Http\Controllers\HomeController::class, 'userl
 //Products Route
 Route::resource('products', ProductController::class);
 
+//Admin Export
+Route::get('/admin/export',[HomeController::class,'AdminExport'])->name('admin.export');
+
 
 //Category Route individual
 Route::get('/category/index',[CategoryController::class,'index'])->name('category.index');
@@ -50,3 +54,8 @@ Route::get('/category/show/{id}',[CategoryController::class,'show'])->name('cate
 Route::get('/category/{id}/edit',[CategoryController::class,'edit'])->name('category.edit');
 Route::post('/category/update/{id}',[CategoryController::class,'update'])->name('category.update');
 Route::get('/category/{id}',[CategoryController::class,'destroy'])->name('category.destroy');
+
+//Category Restore and Force Delete
+Route::get('/caterory/archived', [CategoryController::class, 'CategoryArchived'])->name('category.archived');
+Route::get('/caterory/restore/{id}', [CategoryController::class, 'CategoryRestore'])->name('category.restore');
+Route::get('/caterory/forceDelete/{id}', [CategoryController::class, 'CategoryForceDelete'])->name('category.forceDelete');

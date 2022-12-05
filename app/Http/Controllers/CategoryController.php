@@ -18,6 +18,15 @@ class CategoryController extends Controller
         return view('category.index', compact('categories'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
+    //Category Archived Show 
+    public function CategoryArchived()
+    {
+       // return $request
+        $categoryArchivedData = Category::onlyTrashed()->get();
+        return view('category.archived', compact('categoryArchivedData'))->with('i', (request()->input('page', 1) - 1) * 5);
+        ;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -91,8 +100,8 @@ class CategoryController extends Controller
             'title' => 'required',
         ]);
 
-        $category=Category::findOrfail($request->id);
-        $category->title=$request->title;
+        $category = Category::findOrfail($request->id);
+        $category->title = $request->title;
         $category->update();
         return redirect()->route('category.index')->with('success', 'Category Update successfully.');
 
@@ -110,4 +119,18 @@ class CategoryController extends Controller
         Category::findOrfail($id)->delete();
         return redirect()->back()->with('success', 'Category Delete Successfully');
     }
+
+
+    public function CategoryRestore($id){
+        $categoryRestore = Category::onlyTrashed()->findOrfail($id);
+        $categoryRestore->restore();
+        return redirect()->route('category.index')->with('success', 'Category Restored Successfully');
+        
+    }
+    public function CategoryForceDelete($id){
+        $deleteForever = Category::onlyTrashed()->findOrfail($id);
+        $deleteForever->forceDelete();
+        return redirect()->back()->with('success', 'Category Delete Forever');
+    }
+
 }

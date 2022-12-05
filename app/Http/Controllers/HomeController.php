@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Exports\AdminUserExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
@@ -31,6 +33,11 @@ class HomeController extends Controller
     public function userlistshow(){
         $userlists=User::all();
         return view('user.index',compact('userlists'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function AdminExport(){
+
+        return Excel::download(new AdminUserExport, 'users.xlsx');
     }
 
 }

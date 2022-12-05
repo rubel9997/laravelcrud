@@ -8,6 +8,7 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
                     <div class="pull-right mt-2 ms-2">
                         <a class="btn btn-info" href="{{ route('home') }}"> Dashboard</a>
+                        <a class="btn btn-secondary" href="{{ route('admin.export') }}"> Export</a>
                     </div>
                     <div class="card-body">
 
