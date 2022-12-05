@@ -10,16 +10,14 @@
                         <a class="btn btn-success" href="{{ route('category.create') }}"> Create Category</a>
                         <a class="btn btn-info" href="{{ route('home') }}"> Dashboard</a>
                         <a class="btn btn-primary" href="{{ route('category.index') }}"> Refresh</a>
-                        <a href="{{ route('category.archived') }}" name="archived" class="btn btn-dark">Archieve</a>
                     </div>
-                    <div class="pull-right mt-2 ms-2">
-                        <div class="">
-                            <form action="{{route('search')}}" method="GET">
-                                <input type="text" name="search" id="search" placeholder="Search Here">
-                                <button type="submit">Search</button>
-                            </form>
-                        </div>
+                    <div class="mt-2 ms-2">
+                        <form action="{{ route('search') }}" method="GET">
+                        <input type="text" name="search" required  placeholder="Search here">
+                        <button type="submit">Search</button>
+                        </form>
                     </div>
+                    
                     <div class="card-body">
 
                         @if ($message = Session::get('success'))
@@ -32,13 +30,13 @@
 
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>No</th>
+                                    {{-- <th>No</th> --}}
                                     <th>Category Name</th>
                                     <th width="280px">Action</th>
                                 </tr>
                                 @foreach ($categories as $category)
                                     <tr>
-                                        <td>{{ ++$i }}</td>
+                                        {{-- <td>{{ ++$i }}</td> --}}
                                         <td>{{ $category->title }}</td>
                                         <td>
                                             <a href="{{ route('category.show', $category->id) }}"

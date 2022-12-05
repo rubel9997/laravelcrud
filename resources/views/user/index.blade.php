@@ -9,6 +9,8 @@
                     <div class="pull-right mt-2 ms-2">
                         <a class="btn btn-info" href="{{ route('home') }}"> Dashboard</a>
                         <a class="btn btn-secondary" href="{{ route('admin.export') }}"> Export</a>
+                        <a class="btn btn-success" href="{{ route('admin.create') }}"> Admin Create</a>
+                        <a class="btn btn-primary" href="{{ route('admin.list') }}"> Refresh</a>
                     </div>
                     <div class="card-body">
 
@@ -26,13 +28,21 @@
                                     <th> Name</th>
                                     <th> Username</th>
                                     <th> Email</th>
+                                    <th> Role</th>
+                                    <th> Action</th>
                                 </tr>
-                                @foreach ($userlists as $userlist)
+                                @foreach ($adminList as $adminList)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $userlist->name }}</td>
-                                    <td>{{ $userlist->username }}</td>
-                                    <td>{{ $userlist->email }}</td>
+                                    <td>{{ $adminList->name }}</td>
+                                    <td>{{ $adminList->username }}</td>
+                                    <td>{{ $adminList->email }}</td>
+                                    <td>{{ $adminList->role_id }}</td>
+                                    <td>
+                                        <a href="{{route('admin.show',$adminList->id)}}" class="btn btn-primary">Show</a>
+                                        <a href="{{route('admin.edit',$adminList->id)}}" class="btn btn-info">Edit</a>
+                                        <a href="{{ route('admin.delete',$adminList->id)}}" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger">Delete</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </table>

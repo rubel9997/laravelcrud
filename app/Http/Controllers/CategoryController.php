@@ -12,10 +12,22 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $categories = Category::all();
         return view('category.index', compact('categories'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+    
+        // Search in the title and body columns from the posts table
+        $categories = Category::query()
+            ->where('title', 'LIKE', "%{$search}%")
+            ->get();
+            return view('search', compact('categories'));
     }
 
     //Category Archived Show 
@@ -25,6 +37,7 @@ class CategoryController extends Controller
         $categoryArchivedData = Category::onlyTrashed()->get();
         return view('category.archived', compact('categoryArchivedData'))->with('i', (request()->input('page', 1) - 1) * 5);
         ;
+        
     }
 
     /**
